@@ -1,4 +1,4 @@
-  # DataVis - a data visulaization app using angular and d3.
+## DataVis - a data visulaization app using angular and d3.
 
 This project is an Iowa State University project for Computer Science 319 course.
 
