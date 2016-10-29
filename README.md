@@ -18,7 +18,41 @@ cd DataVis
 ## Directory Layout
 
 ```
-Under Construction...
+app/
+  bar-graph/
+    bar-graph.module.js
+    bar-graph.component.js
+    bar-graph.template.html
+  bower-component/
+    ...
+  database-graph/
+    database-graph.module.js
+    database-graph.component.js
+    dataabse-graph.template,html
+  line-graph/
+    line-graph.module.js
+    line-graph.component.js
+    line-graph.template.html
+  pie-chart/
+    pie-chart.module.js
+    pie-chart.componenet.js
+    pie-chart.template.html
+  resources/
+    img/
+      bg.svg
+      cp.svg
+      db.svg
+      lg.svg
+  test-data/
+    test-data.module.js
+    test-data.component.js
+    test-data.template.html
+  app.animation.css
+  app.component.js
+  app.config.js
+  app.module.js
+  app.template.html
+  index.html
 ```
 
 ## Project Authers
