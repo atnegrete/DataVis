@@ -1,0 +1,18 @@
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th ng-repeat="header in $ctrl.tableHeaders">{{header}}</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="data in $ctrl.tableData">
+                <td>{{data.h1}}</td>
+                <td>{{data.h2}}</td>
+                <td>{{data.h3}}</td>
+                <td>{{data.h4}}</td>
+                <td>{{data.h5}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
