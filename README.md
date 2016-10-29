@@ -6,9 +6,9 @@ This project is an Iowa State University project for Computer Science 319 course
 
 To get you started you can simply clone the angular-seed repository and install the dependencies:
 
-### Clone angular-seed
+### Clone DataVis
 
-Clone the angular-seed repository using [git][git]:
+Clone the DataVis repository using [git][git]:
 
 ```
 git clone https://github.com/tbyacoub/DataVis.git
