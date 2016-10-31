@@ -5,6 +5,9 @@ angular
         templateUrl: 'bar-graph/bar-graph.template.html',
         controller: function barGraphController(){
 
+            this.x_axis_name = "X axis";
+            this.y_axis_name = "Y axis";
+
             this.options = {
                 chart: {
                     type: 'discreteBarChart',
@@ -23,10 +26,10 @@ angular
                     },
                     duration: 500,
                     xAxis: {
-                        axisLabel: 'X Axis'
+                        axisLabel: this.x_axis_name
                     },
                     yAxis: {
-                        axisLabel: 'Y Axis',
+                        axisLabel: this.y_axis_name,
                         axisLabelDistance: -10
                     }
                 }
