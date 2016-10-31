@@ -1,2 +1,6 @@
 asdfasdf
+<<<<<<< HEAD
 some more
+=======
+adfsadfasd
+>>>>>>> ecb4f1c88cf635feb2194cb9ef3504dcac3a3eb3
