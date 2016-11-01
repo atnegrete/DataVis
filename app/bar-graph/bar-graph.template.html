@@ -9,13 +9,32 @@
 <div class="panel-content">
     <h2>Bar Graph Data</h2>
     <form novalidate class="bar-graph-data-form">
-        //  Form to change data array in the controller
+        <form novalidate class="form form-control">
+            <div class="form-group">
+                Label: <label><input name="label_input" type="text" ng-model="data.label"></label>
+                Value: <label><input type="number" ng-model="data.value"></label>
+                <button value="enter" ng-click="$ctrl.update(data)" class="btn btn-primary"></button>
+            </div>
+                <table class="table">
+                    <tr>
+                        <th>#</th>
+                        <th>Label</th>
+                        <th>Value</th>
+                    </tr>
+                    <tr ng-repeat="data in $ctrl.data[0]['values']">
+                        <td>{{$index + 1}}</td>
+                        <td ng-click="$ctrl.edit(this)">{{data["label"]}}</td>
+                        <td ng-click="$ctrl.edit(this)">{{data["value"]}}</td>
+                    </tr>
+                </table>
+        </form>
     </form>
 </div>
+
+<hr>
 
 <div class="panel footer">
     <h3>Bar Graph Functions</h3>
     <form novalidate class="bar-graph-options-form">
-        // Form to change option array in the controller
     </form>
 </div>
