@@ -28,6 +28,9 @@
         </div>
     <form>
 
+    <h3 style="margin-left:45%"> Payments </h3>
+
+
     <!--THIS IS FOR TESTING-->
     <pre>payment = {{payment | json}}</pre>
     <pre>all_data = {{all_data | json}}</pre>
@@ -37,24 +40,27 @@
 
 <div class="panel footer">
     <h2>Pie Chart Data Options</h2>
-    <div id="left">
-        <form novalidate class="simple-form">
-            New Category: 
-                <input name="new_category" type="text" ng-model="new_category.name" placeholder="Enter new Category name"/> 
-                <input type="submit" ng-click="$ctrl.addCategory(new_category)" value="Add Category" />
-        <form>
-    </div>
-    <div id = "right">
-        <form novalidate class="simple-form">
-            Categories: <br/>
-            <select ng-model="sub_category.category">
-                <option value="">Please Select</option>
-                <option ng-repeat="(key,cat) in $ctrl.categories">{{cat.key}}</option>
-            </select> 
-            <br/>
-            New Sub-Category: <br/>
-                <input type="text" ng-model="sub_category.name" placeholder="Enter new sub-cateogry name"/> 
-                <input type="submit" ng-click="$ctrl.addSubCategory(sub_category)" value="Add Category" />
-        <form>
+    <div class="row">
+        <div class="col-sm-4 options">
+            <form novalidate class="simple-form">
+                New Category: <br/>
+                    <input name="new_category" type="text" ng-model="new_category.name" placeholder="Enter new Category name"/> <br/>
+                    <input type="submit" ng-click="$ctrl.addCategory(new_category)" value="Add Category" />
+            <form>
+        </div>
+        <div class="col-sm-4 options">
+            <form novalidate class="simple-form">
+                Categories: <br/>
+                <select ng-model="sub_category.parent">
+                    <option value="">Please Select</option>
+                    <option ng-repeat="(key,cat) in $ctrl.categories">{{cat.key}}</option>
+                </select> 
+                <br/>
+                New Sub-Category: <br/>
+                    <input type="text" ng-model="sub_category.name" placeholder="Enter new sub-cateogry name"/> <br/> 
+                    <input type="submit" ng-click="$ctrl.addSubCategory(sub_category)" value="Add Sub Category" />
+            <form>
+        </div>
+        <div class="col-sm-4 options">Change View </div>
     </div>
 </div>

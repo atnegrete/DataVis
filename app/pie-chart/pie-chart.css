@@ -1,6 +1,6 @@
-.footer #left { 
-    float:left;
-}
-.footer #right { 
-    float:right;
+
+.options {
+    padding-top: 20px;
+    background-color: #f1f1f1;
+    height: 300px ;
 }

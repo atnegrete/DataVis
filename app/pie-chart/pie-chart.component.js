@@ -7,7 +7,6 @@ angular
 
             this.all_data = [];
             this.data = [];
-            this.sub_category_data = [];
             this.temp_data = [];
 
             this.categories = [
@@ -39,6 +38,7 @@ angular
             };
 
             this.options = {
+                sub_category_data : [],
                 chart: {
                     type: 'pieChart',
                     height: 500,
@@ -58,17 +58,6 @@ angular
                         }
                     },
                     useInteractiveGuideline: true,
-                    interactiveLayer: {
-                        dispatch: {
-                            elementMousemove: function(e) {
-                                console.log(e.mouseX + " " + e.mouseY + " " + e.pointXValue);
-                            },
-                            elementClick: function(e) {
-                                console.log(e.mouseX + " " + e.mouseY + " " + e.pointXValue);
-                            }
-                        }
-                    }, 
-                                    
                     pie: {
                         dispatch: {
                             elementClick: function(e) {
@@ -93,7 +82,7 @@ angular
                 this.temp_data = this.data; 
                 sub_category_data = this.sub_category_data;
                 categories = this.categories;
-                console.log(data);
+                console.log(this.data);
                 for(var i = 0; i < categories.length; i++){
                     var current_category = categories[i].key;
                     if(current_category == category){
@@ -135,6 +124,18 @@ angular
                 });
                 return ret;
             }
+
+            /* Add sub category to parent category */
+            /* TO DO : Need to catch duplicates before they throw ngRepeat dupes error */
+            this.addSubCategory = function(sub_category){
+                var parent = sub_category.parent;
+                for(var i = 0; i < this.categories.length; i ++){
+                    if(this.categories[i].key == parent){
+                        this.categories[i].values.push(sub_category.name);
+                    }
+                }
+            }
+
 
         }
     });
