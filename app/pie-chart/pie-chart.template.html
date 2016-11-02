@@ -7,15 +7,52 @@
 </div>
 
 <div class="panel-content">
-    <h2>Pie Chart Data</h2>
-    <form novalidate class="bar-graph-data-form">
-        //  Form to change data array in the controller
-    </form>
+    <h2>Pie Chart Data Input</h2>
+    <form name="form" class="pie-chart-form" ng-submit="$ctrl.update(payment)">
+        <div class="control-group" ng-class="{true: 'error'}[submitted && form.$invalid]">
+            Payment Name: 
+                <input name="pname" type="text" ng-model="payment.pname" ng-required="true" placeholder="Enter Payment Name"/> 
+                <span class="help-inline" ng-show="submitted && form.pname.$error.required"></span> <br/>
+            Amount: $ 
+                <input name="amount" step="0.01" type="number" ng-model="payment.amount" ng-required="true" placeholder="Enter amount (x.xx format)"/> 
+                <span class="help-inline" ng-show="submitted && form.amount.$error.required"></span> <br/>
+            Category: 
+                <select id="select_category" name="category" ng-model="payment.category" ng-required="true">
+                    <option value="">Please Select Category</option>
+                    <optgroup ng-repeat="(key,cat) in $ctrl.categories" label="{{cat.key}}">
+                        <option ng-repeat="sub in cat.values">{{sub}}</option>
+                    </optgroup>
+                </select> 
+                <span class="help-inline" ng-show="submitted && form.category.$error.required"></span> <br/>
+                <input type="submit" ng-click="submitted=true" value="Add Payment" />
+        </div>
+    <form>
+    <pre>payment = {{payment | json}}</pre>
+    <pre>all_data = {{all_data | json}}</pre>
+    <pre>data = {{data | json}}</pre>
+    <pre>sub_category_data = {{sub_category_data | json}}</pre>
 </div>
 
 <div class="panel footer">
-    <h3>Pie Chart Functions</h3>
-    <form novalidate class="bar-graph-options-form">
-        // Form to change option array in the controller
-    </form>
+    <h2>Pie Chart Data Options</h2>
+    <div id="left">
+        <form novalidate class="simple-form">
+            New Category: 
+                <input name="new_category" type="text" ng-model="new_category.name" placeholder="Enter new Category name"/> 
+                <input type="submit" ng-click="$ctrl.addCategory(new_category)" value="Add Category" />
+        <form>
+    </div>
+    <div id = "right">
+        <form novalidate class="simple-form">
+            Categories: <br/>
+            <select ng-model="sub_category.category">
+                <option value="">Please Select</option>
+                <option ng-repeat="(key,cat) in $ctrl.categories">{{cat.key}}</option>
+            </select> 
+            <br/>
+            New Sub-Category: <br/>
+                <input type="text" ng-model="sub_category.name" placeholder="Enter new sub-cateogry name"/> 
+                <input type="submit" ng-click="$ctrl.addSubCategory(sub_category)" value="Add Category" />
+        <form>
+    </div>
 </div>
