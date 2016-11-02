@@ -4,13 +4,42 @@
 
 <div class="panel-body">
     <nvd3 options="$ctrl.options" data="$ctrl.data"></nvd3>
+    <nvd3 options="$ctrl.options" data="$ctrl.dataSP" hidden></nvd3>
 </div>
 
 <div class="panel-content">
+
     <h2>Database Graph Data</h2>
-    <form novalidate class="bar-graph-data-form">
-        //  Form to change data array in the controller
+    <form novalidate class="form">
+
+        <h4>Create Nodes</h4>
+        <div class="form-group">
+            Name: <label><input class="form-control" type="text" ng-model="node.name" required></label>
+            Group: <label><input class="form-control" type="number" ng-model="node.group" required></label>
+            <button type="submit" ng-click="$ctrl.addNode(node)" class="btn btn-primary">Enter</button>
+        </div>
+
     </form>
+
+    <table class="table" id="dataTable">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Group</th>
+            <th>Target Node</th>
+            <th>Edge Value</th>
+        </tr>
+        <tr ng-repeat="node in $ctrl.data['nodes']">
+            <td>{{node["name"]}}</td>
+            <td>{{node["group"]}}</td>
+            <td><input type="number" ng-model="link.target"></td>
+            <td><input type="number" ng-model="link.value"></td>
+            <input hidden ng-init="link.source=$index">
+            <td><button type="submit" ng-click="$ctrl.addRel(link)" class="btn btn-primary"></button></td>
+        </tr>
+    </table>
+
+
 </div>
 
 <div class="panel footer">
