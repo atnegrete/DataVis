@@ -7,34 +7,55 @@
 </div>
 
 <div class="panel-content">
+
     <h2>Bar Graph Data</h2>
-    <form novalidate class="bar-graph-data-form">
-        <form novalidate class="form form-control">
-            <div class="form-group">
-                Label: <label><input name="label_input" type="text" ng-model="data.label"></label>
-                Value: <label><input type="number" ng-model="data.value"></label>
-                <button value="enter" ng-click="$ctrl.update(data)" class="btn btn-primary"></button>
-            </div>
-                <table class="table">
-                    <tr>
-                        <th>#</th>
-                        <th>Label</th>
-                        <th>Value</th>
-                    </tr>
-                    <tr ng-repeat="data in $ctrl.data[0]['values']">
-                        <td>{{$index + 1}}</td>
-                        <td ng-click="$ctrl.edit(this)">{{data["label"]}}</td>
-                        <td ng-click="$ctrl.edit(this)">{{data["value"]}}</td>
-                    </tr>
-                </table>
-        </form>
+
+    <form novalidate class="form">
+        <div class="form-group">
+            Label: <label><input class="form-control" type="text" ng-model="input.label" required></label>
+            Value: <label><input class="form-control" type="number" ng-model="input.value" required></label>
+            <button type="submit" ng-click="$ctrl.update(input)" class="btn btn-primary">Enter</button>
+        </div>
     </form>
+
+    <table class="table">
+        <tr>
+            <th>#</th>
+            <th>Label</th>
+            <th>Value</th>
+        </tr>
+        <tr ng-repeat="data in $ctrl.data[0]['values']">
+            <td>{{$index + 1}}</td>
+            <td>{{data["label"]}}</td>
+            <td>{{data["value"]}}</td>
+        </tr>
+    </table>
+
 </div>
 
 <hr>
 
 <div class="panel footer">
-    <h3>Bar Graph Functions</h3>
-    <form novalidate class="bar-graph-options-form">
+    <h3>Bar Graph Options and Functions</h3>
+    <form novalidate class="form">
+
+        <hr>
+        <h4>Graph Labels</h4>
+        <div class="form-group">
+            X axis label: <label><input class="form-control" type="text" ng-model="$ctrl.x_axis_label"></label>
+            Y axis label: <label><input class="form-control" type="text" ng-model="$ctrl.y_axis_label" required></label>
+            <button type="submit" ng-click="$ctrl.refreshLabels()" class="btn btn-primary">Refresh</button>
+        </div>
+
+        <hr>
+        <h4>Sort Data</h4>
+        <div class="form-group">
+            <label><input type="radio" name="sort" ng-model="sortType" value="ascending">ascending</label>
+            <label><input type="radio" name="sort" ng-model="sortType" value="descending">descending</label>
+            <button type="submit" ng-click="$ctrl.sort(sortType)" class="btn btn-primary">Sort</button>
+        </div>
+
+        <hr>
+
     </form>
 </div>
