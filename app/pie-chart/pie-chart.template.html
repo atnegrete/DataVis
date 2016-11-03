@@ -11,13 +11,13 @@
     <form name="form" class="pie-chart-form" ng-submit="$ctrl.update(payment)">
         <div class="control-group" ng-class="{true: 'error'}[submitted && form.$invalid]">
             Payment Name: 
-                <input name="pname" type="text" ng-model="payment.pname" ng-required="true" placeholder="Enter Payment Name"/> 
+                <input class="inputs" name="pname" type="text" ng-model="payment.pname" ng-required="true" placeholder="Enter Payment Name"/> 
                 <span class="help-inline" ng-show="submitted && form.pname.$error.required"></span> <br/>
             Amount: $ 
-                <input name="amount" step="0.01" type="number" ng-model="payment.amount" ng-required="true" placeholder="Enter amount (x.xx format)"/> 
+                <input class="inputs" name="amount" step="0.01" type="number" ng-model="payment.amount" ng-required="true" placeholder="Enter amount (x.xx format)"/> 
                 <span class="help-inline" ng-show="submitted && form.amount.$error.required"></span> <br/>
             Category: 
-                <select id="select_category" name="category" ng-model="payment.category" ng-required="true">
+                <select class="inputs" id="select_category" name="category" ng-model="payment.category" ng-required="true">
                     <option value="">Please Select Category</option>
                     <optgroup ng-repeat="(key,cat) in $ctrl.categories" label="{{cat.key}}">
                         <option ng-repeat="sub in cat.values">{{sub}}</option>
@@ -28,39 +28,67 @@
         </div>
     <form>
 
-    <h3 style="margin-left:45%"> Payments </h3>
-
-
     <!--THIS IS FOR TESTING-->
-    <pre>payment = {{payment | json}}</pre>
+    <!--<pre>payment = {{payment | json}}</pre>
     <pre>all_data = {{all_data | json}}</pre>
     <pre>data = {{data | json}}</pre>
-    <pre>sub_category_data = {{sub_category_data | json}}</pre>
+    <pre>sub_category_data = {{sub_category_data | json}}</pre>-->
 </div>
 
 <div class="panel footer">
     <h2>Pie Chart Data Options</h2>
     <div class="row">
-        <div class="col-sm-4 options">
+        <div class="col-sm-3 options">
             <form novalidate class="simple-form">
                 New Category: <br/>
-                    <input name="new_category" type="text" ng-model="new_category.name" placeholder="Enter new Category name"/> <br/>
-                    <input type="submit" ng-click="$ctrl.addCategory(new_category)" value="Add Category" />
+                    <input class="inputs" name="new_category" type="text" ng-model="new_category.name" placeholder="Enter new Category name"/> <br/>
+                    <input class="inputs" type="submit" ng-click="$ctrl.addCategory(new_category)" value="Add Category" />
             <form>
         </div>
-        <div class="col-sm-4 options">
+        <div class="col-sm-6 options">
+            <section id="container">
+                    <h4 style="margin-left:27%"> Select Pie-Chart to view </h4> <br/>
+                    <div style="text-align:center;">
+                        <input class="cat_button" type="button" value="View All Categories" ng-model="all" ng-click="$ctrl.changePieChart('all')"> <br/>
+                        <input class="cat_button" ng-repeat="(key,cat) in $ctrl.categories" ng-model="cat.key"type="button" value="{{cat.key}}" ng-click="$ctrl.changePieChart(this)">
+                    </div>
+            </section>
+        </div>
+        <div class="col-sm-3 options">
             <form novalidate class="simple-form">
                 Categories: <br/>
-                <select ng-model="sub_category.parent">
+                <select class="inputs" ng-model="sub_category.parent">
                     <option value="">Please Select</option>
                     <option ng-repeat="(key,cat) in $ctrl.categories">{{cat.key}}</option>
                 </select> 
                 <br/>
                 New Sub-Category: <br/>
-                    <input type="text" ng-model="sub_category.name" placeholder="Enter new sub-cateogry name"/> <br/> 
-                    <input type="submit" ng-click="$ctrl.addSubCategory(sub_category)" value="Add Sub Category" />
+                    <input class="inputs" type="text" ng-model="sub_category.name" placeholder="Enter new sub-cateogry name"/> <br/> 
+                    <input class="inputs" type="submit" ng-click="$ctrl.addSubCategory(sub_category)" value="Add Sub Category" />
             <form>
         </div>
-        <div class="col-sm-4 options">Change View </div>
+    </div>
+</div>
+<br/>
+<div style="margin-top:10px">
+    <h3 style="margin-left:45%"> Payment History </h3>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Payment Name</th>
+                <th>Payment For</th>
+                <th>Amount $</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="pay in $ctrl.all_data">
+                    <td>{{pay.pname}}</td>
+                    <td>{{pay.category}}</td>
+                    <td>{{pay.amount}}</td>
+                </tr>
+                <hr>
+            </tbody>
+        </table>
     </div>
 </div>

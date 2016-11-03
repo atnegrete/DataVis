@@ -4,10 +4,11 @@ angular
         templateUrl: 'pie-chart/pie-chart.template.html',
         controller: function pieChartController($scope) {
             this.clear = {};
-
+            this.current = "all";
             this.all_data = [];
             this.data = [];
             this.temp_data = [];
+            this.sub_category_data = [];
 
             this.categories = [
                 {key:"Utilities", values:["Water", "Electricity"]},
@@ -16,8 +17,9 @@ angular
                 {key:"Medical", values:[]}
             ];
 
+            /* Adds a new payment to the data arrays */
             this.update = function(payment) {
-                console.log("Updating");
+                if(this.current != "all"){this.data = getCategoryData();}
                 this.all_data.push(payment);
                 var parent_category = this.findParentCategory(payment.category, this.categories);
 
@@ -63,40 +65,62 @@ angular
                             elementClick: function(e) {
                                 console.log(e);
                                 alert("Selected: " + e.data.key);
-                                changeToSingleCategory(e.data.key);
+                                //changeToSingleCategory(e.data.key);
                             },
                         }
                     }
                 }
             };
 
+            /* Adds a new category */
             this.addCategory = function (category_to_add){
-                console.log("Adding category: " + category_to_add);
                 this.categories.push({key:category_to_add.name, values:[]});
             };
 
+            /* Changes pie chart to given sub Category or 'all' to change to view all categories */
+            this.changePieChart = function(change_to){
+                if(change_to == "all"){
+                    this.current = change_to;
+                    this.data = this.getCategoryData();
+                }else{
+                    var change_to_name = change_to.cat.key;
+                    this.changeToSingleCategory(change_to_name);
+                }
+            }
 
-            /* FUNCTION IS BROKEN - NEED TO FIX */
-            changeToSingleCategory = function(category){
+            /* Changes pie-chart to given category */
+            this.changeToSingleCategory = function(category){
                 // First keep store the current data so we can use it later.
-                this.temp_data = this.data; 
-                sub_category_data = this.sub_category_data;
-                categories = this.categories;
-                console.log(this.data);
-                for(var i = 0; i < categories.length; i++){
-                    var current_category = categories[i].key;
+                retData = [];
+                for(var i = 0; i < this.categories.length; i++){
+                    var current_category = this.categories[i].key;
                     if(current_category == category){
                         // Loop through every sub category.
-                        for(var j = 0; j < sub_category_data.length; j++){
+                        for(var j = 0; j < this.sub_category_data.length; j++){
                             // Loop through all the values of the categories and see if they match as parent for the sub category.
-                            for(var k = 0; k < category[i].values.length; k ++){
-                                if(sub_category_data[j].key == category[i].values[k]){
-                                    retData.push({key:sub_category_data[j].key, y: sub_category_data[j].value});
+                            for(var k = 0; k < this.categories[i].values.length; k ++){
+                                if(this.sub_category_data[j].key == this.categories[i].values[k]){
+                                    retData.push({key:this.sub_category_data[j].key, y: this.sub_category_data[j].y});
                                 }
                             }
                         }
                     }
                 }
+                this.data = retData;
+                this.current = category;
+            }
+
+            /* Changes main data to main categories, used when adding a payment and when changing to View All */
+            this.getCategoryData = function(){
+                var temp = [];
+                for(var i = 0; i < this.all_data.length; i++){
+                    var cur = this.all_data[i];
+                    var parent_category = this.findParentCategory(cur.category,this.categories);
+                    if(! this.keyExists(parent_category, temp, cur.amount)){
+                        temp.push({key: parent_category , y: cur.amount});
+                    }
+                }
+                return temp;
             }
 
             /* Finds the Category for the Given category, or retuns an error. */

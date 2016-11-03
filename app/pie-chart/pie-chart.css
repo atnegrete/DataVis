@@ -2,5 +2,37 @@
 .options {
     padding-top: 20px;
     background-color: #f1f1f1;
-    height: 300px ;
+}
+
+.cat_button {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 5px;
+  font-family: Georgia;
+  color: #ffffff;
+  font-size: 20px;
+  background: #d63a4f;
+  padding: 5px 7px 5px 10px;
+  text-decoration: none;
+  width: 200px;
+}
+
+.cat_button:hover {
+  background: #ff0026;
+  text-decoration: none;
+}
+
+#container {
+  margin: 0 auto 0 auto;
+  background-color: #E288A0;
+  background-color: rgba(255,255,255,0.5);
+  border: 2px solid #B71F45;
+  padding: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.inputs {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
